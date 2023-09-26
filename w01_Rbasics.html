@@ -157,7 +157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome to MSE (2023/24) A</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome to MSE (2023/24)</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -332,13 +332,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_name_last <span class="ot">&lt;-</span> <span class="st">"Ari"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Obviously, you cannot make a calculation using words. For example, it is nonsensical to subtract two words. You cannot do any calculation with words.</p>
+<p>Obviously, you cannot make a calculation using words. It is nonsensical to subtract two words. You cannot do any calculation with words.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>my_name_last <span class="sc">-</span> my_name</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> Error <span class="cf">in</span> my_name_last <span class="sc">-</span> my_name<span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Sometimes numerical information is stored as text. In that case, R will not consider it as a number.</p>
-<p>For example, see three objects below.</p>
+<p>Sometimes numerical information is stored as text. In that case, R will not consider it as a number. For example, see three objects below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>num1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>num2 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
@@ -348,15 +347,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>num1</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="dv">10</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>num2</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="dv">100</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>num3</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"1000"</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">+</span> num2</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="dv">110</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">+</span> num3</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> Error <span class="cf">in</span> num1 <span class="sc">+</span> num3<span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>num2</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="dv">100</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>num3</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"1000"</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">+</span> num2</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="dv">110</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>num1 <span class="sc">+</span> num3</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> Error <span class="cf">in</span> num1 <span class="sc">+</span> num3<span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-a-simple-dataset" class="level2" data-number="1.5">
@@ -457,7 +459,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Note that birth_years are stored as text, not numbers. I know this because they are within quotation marks.</p>
 <p>It is customary to keep spreadsheets as something called “data frames” in R. This will not change our data, but makes further operations easier by unlocking some of the features of R.</p>
-<p>R will also automatically convert columns that store only numbers to numerical data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(my_data)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,6 +471,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> <span class="dv">5</span> David Cameron        <span class="dv">1966</span></span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> <span class="dv">6</span>  Gordon Brown        <span class="dv">1951</span></span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> <span class="dv">7</span>    Tony Blair        <span class="dv">1953</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can take a better look at the dataset using View() function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Columns in a data frame are also called variables. We have two variables in the dataset:</p>
+<ol type="1">
+<li>names_pm : Name of the UK PM</li>
+<li>birth_years: Birth year of the PM</li>
+</ol>
+<p>There are a few ways to access a variable. A straightforward approach is to use the ‘$’ notation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 'name of the data frame'$'name of the variable' </span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>my_data<span class="sc">$</span>names_pm</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"Rishi Sunak"</span>   <span class="st">"Liz Truss"</span>     <span class="st">"Boris Johnson"</span> <span class="st">"Theresa May"</span>  </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">5</span>] <span class="st">"David Cameron"</span> <span class="st">"Gordon Brown"</span>  <span class="st">"Tony Blair"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now it is your turn. Display the names variable.</p>
+<div class="cell">
+<details>
+<summary><strong>Reveal the code</strong></summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>my_data<span class="sc">$</span>birth_years</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"1980"</span> <span class="st">"1975"</span> <span class="st">"1964"</span> <span class="st">"1956"</span> <span class="st">"1966"</span> <span class="st">"1951"</span> <span class="st">"1953"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>You can think this expression as a sentence in R. In plain English, this expression tells R to bring the variable <em>names_pm</em> within the data frame <em>my_data</em>. The symbol ‘$’ refers to the ‘within’ part of this sentence.</p>
+<p>Just like you can convey the same meaning using different sentence structures, there are different ways to do the same thing in R. This is because R is working exactly like a language: it is a language to communicate with the computer.</p>
+<p>Another way is using the square brackets notation ‘[]’. <em>names_pm</em> is the first column in the data frame. To get the variable, you could type the following.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>my_data[,<span class="dv">1</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"Rishi Sunak"</span>   <span class="st">"Liz Truss"</span>     <span class="st">"Boris Johnson"</span> <span class="st">"Theresa May"</span>  </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">5</span>] <span class="st">"David Cameron"</span> <span class="st">"Gordon Brown"</span>  <span class="st">"Tony Blair"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that we did not simply write <strong>my_data[1]</strong>. There is a comma: <strong>my_data[<strong>,</strong>1]</strong></p>
+<p>In a spreadsheet, we have two dimensions: rows and columns. By convention, rows are considered as the first dimension, and columns are considered as the second. This is why we had to use a comma to designate that we are interested in columns. If left the first dimension unspecified, which tells R to bring everything.</p>
+<p>If you want to get the first row, you would type the following.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>my_data[<span class="dv">1</span>,]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span>      names_pm birth_years</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> <span class="dv">1</span> Rishi Sunak        <span class="dv">1980</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Try it yourself; get the fourth row.</p>
+<div class="cell">
+<details>
+<summary><strong>Reveal the code</strong></summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>my_data[<span class="dv">4</span>,]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span>      names_pm birth_years</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> <span class="dv">4</span> Theresa May        <span class="dv">1956</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s put these together: you can tell R to bring a specific observation. For example, third row of second column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>my_data[<span class="dv">3</span>,<span class="dv">2</span>]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"1964"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also ask for multiple items by plugging in the combine function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Third and fourth row of second column</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>my_data[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">2</span>]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Output<span class="sc">:</span> [<span class="dv">1</span>] <span class="st">"1964"</span> <span class="st">"1956"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -612,7 +674,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome to MSE (2023/24) A</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome to MSE (2023/24)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
