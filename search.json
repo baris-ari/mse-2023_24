@@ -61,5 +61,61 @@
     "title": "Methods of Social Enquiry",
     "section": "Welcome to MSE (2023/24)",
     "text": "Welcome to MSE (2023/24)\nThis is the website of the Methods of Social Enquiry (PPLX7006).\nThe module has two in-person teaching components:\n\nThematic lectures (one-hour on Monday)\nApplied data analysis (two-hours on Thursday)\n\nAttendance is mandatory for all teaching sessions. If you cannot attend to any of the sessions, please make sure to submit an extenuating circumstances through eVision.\nWe will use this website for applied data analysis. The website is not a substitute for module Blackboard. We will use this site in conjunction with Blackboard."
+  },
+  {
+    "objectID": "w02_Data_types.html",
+    "href": "w02_Data_types.html",
+    "title": "2  Data in R",
+    "section": "",
+    "text": "3 Creating a simple dataset\nLast week we created a simple spreadsheet that looked like the data shown in Figure 3.1.\nWe can achieve this by doing a column bind which refers to vertically binding two vectors and can be done using the cbind() function.\nThe first column in my_data is names_pm and the second column is birth_years. We have now two dimensions: columns and rows.\nRecall that to ask R to bring a specific item in a two-dimensional object, such as a spreadsheet, we can use the square-brackets [] notation but we need to specify both dimension.\nFirst dimension refers to rows and second dimension refers to columns. For example, to get the third row in second column:\nTo sum up, we bind two vectors by column. Each column is a vector. We can call these column vectors.\nTo get the first column, names_pm, we can use the square brackets notation.\nWe left the first dimension, which designates the row, unspecified to tell R to bring everything. We could also use column names instead of column numbers.\nWe can do the same for rows. To get a row vector, use the squared bracket notation.\nR will give you an error message if you go out of bounds.\nIt is customary to keep a spreadsheet type of two-dimensional data as a data frame in R.\nLet’s check the class of my_data.\nIt looks like the class of my_data is “matrix” and “array”. Matrix is a two-dimensional array.\nWe can turn my_data into a data frame.\nIn this module, we will primarily work with data frames.\nRecall that we can use the $ notation when working with data frames.\nWe can check the number of columns and the number of rows of our data frame by using ncol() and nrow() functions."
+  },
+  {
+    "objectID": "w02_Data_types.html#class-of-an-object",
+    "href": "w02_Data_types.html#class-of-an-object",
+    "title": "2  Data in R",
+    "section": "2.1 Class of an object",
+    "text": "2.1 Class of an object\nThe object birth_years is a numerical vector. It contains numbers. Let’s check the object.\n\nbirth_years\n#> [1] 1980 1975 1964 1956 1966 1951 1953\n\nR understand the differences between textual and numerical information. We can check the class of an object using the class() function.\n\n# birth_years contain numerical information\nclass(birth_years)\n#> [1] \"numeric\"\n\n# names_pm contain textual information, which is called character in R\nclass(names_pm)\n#> [1] \"character\""
+  },
+  {
+    "objectID": "w02_Data_types.html#length-of-an-object",
+    "href": "w02_Data_types.html#length-of-an-object",
+    "title": "2  Data in R",
+    "section": "2.2 Length of an object",
+    "text": "2.2 Length of an object\nWe typed names of last seven Prime Ministers and their respective birth years. The number of items in names_pm and birth_years should be both seven. We can see the number of items in a vector by the length() function.\n\n# Number of items in a vector can be seen by length()\n\n# Length of names_pm:\nlength(names_pm)\n#> [1] 7\n\n# Length of birth_years:\nlength(birth_years)\n#> [1] 7"
+  },
+  {
+    "objectID": "w02_Data_types.html#is-equal-to-operator",
+    "href": "w02_Data_types.html#is-equal-to-operator",
+    "title": "2  Data in R",
+    "section": "2.3 is equal to operator",
+    "text": "2.3 is equal to operator\nYou can ask R whether two things are equal to each other or not. To do so, we are going to use the == operator, which means is equal to.\n\n# is equal to operator: ==\n# is the length of names_pm equal to birth_years\nlength(names_pm) == length(birth_years)\n#> [1] TRUE\n# yes it is\n\n# is the class of names_pm equal to birth_years\nclass(names_pm) == class(birth_years)\n#> [1] FALSE\n# no it is not\n# because names_pm contain textual information and birth_years contain numerical information"
+  },
+  {
+    "objectID": "w02_Data_types.html#data-frame",
+    "href": "w02_Data_types.html#data-frame",
+    "title": "2  Data in R",
+    "section": "2.5 Data frame",
+    "text": "2.5 Data frame\nIt is customary to keep a spreadsheet type of two-dimensional data as a data frame in R.\nLet’s check the class of my_data.\n\n# Class of my_data \nclass(my_data)\n#> [1] \"matrix\" \"array\"\n\nIt looks like the class of my_data is “matrix” and “array”. Matrix is a two-dimensional array.\nWe can turn my_data into a data frame.\n\n# Turn my_data into data frame\nmy_data <- as.data.frame(my_data)\n# this overwrote my_data as a data frame\n\n# Check its class\nclass(my_data)\n#> [1] \"data.frame\"\n\nIn this module, we will primarily work with data frames.\nRecall that we can use the $ notation when working with data frames.\n\n# bring names_pm\nmy_data$names_pm\n#> [1] \"Rishi Sunak\"   \"Liz Truss\"     \"Boris Johnson\" \"Theresa May\"  \n#> [5] \"David Cameron\" \"Gordon Brown\"  \"Tony Blair\"\n\n# bring birth_years\nmy_data$birth_years\n#> [1] \"1980\" \"1975\" \"1964\" \"1956\" \"1966\" \"1951\" \"1953\"\n\n# bring the third item in birth_years\nmy_data$birth_years[3]\n#> [1] \"1964\"\n\nWe can check the number of columns and the number of rows of our data frame by using ncol() and nrow() functions.\n\n# number of columns\nncol(my_data)\n#> [1] 2\n\n# number of rows\nnrow(my_data)\n#> [1] 7\n\n# dimension:\ndim(my_data)\n#> [1] 7 2\n# we have two dimensions: rows and columns, \n# first dimension has seven items.\n# second dimension has two items.\n\n# number of dimensions:\nlength(dim(my_data))\n#> [1] 2\n\nNote that I put a function within a function when I put dim(my_data) into length().\n\n# number of dimensions:\nlength(dim(my_data))\n#> [1] 2"
+  },
+  {
+    "objectID": "w02_Data_types.html#numerical-value-as-text",
+    "href": "w02_Data_types.html#numerical-value-as-text",
+    "title": "2  Data in R",
+    "section": "2.7 Numerical value as text",
+    "text": "2.7 Numerical value as text"
+  },
+  {
+    "objectID": "w02_Data_types.html#creating-a-simple-dataset",
+    "href": "w02_Data_types.html#creating-a-simple-dataset",
+    "title": "2  Data in R",
+    "section": "2.4 Creating a simple dataset",
+    "text": "2.4 Creating a simple dataset\nLast week we created a simple spreadsheet that looked like the data shown in Figure 2.1.\n\n\n\n\n\nFigure 2.1: A simple dataset\n\n\n\n\nWe can achieve this by doing a column bind which refers to vertically binding two vectors and can be done using the cbind() function.\n\nmy_data <- cbind(names_pm, birth_years)\nmy_data\n#>      names_pm        birth_years\n#> [1,] \"Rishi Sunak\"   \"1980\"     \n#> [2,] \"Liz Truss\"     \"1975\"     \n#> [3,] \"Boris Johnson\" \"1964\"     \n#> [4,] \"Theresa May\"   \"1956\"     \n#> [5,] \"David Cameron\" \"1966\"     \n#> [6,] \"Gordon Brown\"  \"1951\"     \n#> [7,] \"Tony Blair\"    \"1953\"\n\nThe first column in my_data is names_pm and the second column is birth_years. We have now two dimensions: columns and rows.\nRecall that to ask R to bring a specific item in a two-dimensional object, such as a spreadsheet, we can use the square-brackets [] notation but we need to specify both dimension.\nFirst dimension refers to rows and second dimension refers to columns. For example, to get the third row in second column:\n\n# Third row in second column\nmy_data[3,2]\n#> birth_years \n#>      \"1964\"\n\nTo sum up, we bind two vectors by column. Each column is a vector. We can call these column vectors.\nTo get the first column, names_pm, we can use the square brackets notation.\n\n# Bring the first column\nmy_data[,1]\n#> [1] \"Rishi Sunak\"   \"Liz Truss\"     \"Boris Johnson\" \"Theresa May\"  \n#> [5] \"David Cameron\" \"Gordon Brown\"  \"Tony Blair\"\n\n# Bring the second column\nmy_data[,2]\n#> [1] \"1980\" \"1975\" \"1964\" \"1956\" \"1966\" \"1951\" \"1953\"\n\nWe left the first dimension, which designates the row, unspecified to tell R to bring everything. We could also use column names instead of column numbers.\n\n# Bring the column birth_years\nmy_data[,\"birth_years\"]\n#> [1] \"1980\" \"1975\" \"1964\" \"1956\" \"1966\" \"1951\" \"1953\"\n\n# Bring the column names_pm\nmy_data[,\"names_pm\"]\n#> [1] \"Rishi Sunak\"   \"Liz Truss\"     \"Boris Johnson\" \"Theresa May\"  \n#> [5] \"David Cameron\" \"Gordon Brown\"  \"Tony Blair\"\n\nWe can do the same for rows. To get a row vector, use the squared bracket notation.\n\n# Bring the first row\nmy_data[1, ]\n#>      names_pm   birth_years \n#> \"Rishi Sunak\"        \"1980\"\n\n# Bring the third row\nmy_data[3,]\n#>        names_pm     birth_years \n#> \"Boris Johnson\"          \"1964\"\n\n# Bring the fourth row\nmy_data[4,]\n#>      names_pm   birth_years \n#> \"Theresa May\"        \"1956\"\n\nR will give you an error message if you go out of bounds.\n\n# Bring the third column\nmy_data[,3]\n#> Error in my_data[, 3]: subscript out of bounds\n\n# Bring the 10th row\nmy_data[10,]\n#> Error in my_data[10, ]: subscript out of bounds\n\n# Bring the second column, ninth row\nmy_data[9,2]\n#> Error in my_data[9, 2]: subscript out of bounds"
+  },
+  {
+    "objectID": "w02_Data_types.html#variable-row-observation",
+    "href": "w02_Data_types.html#variable-row-observation",
+    "title": "2  Data in R",
+    "section": "2.6 Variable, Row, Observation",
+    "text": "2.6 Variable, Row, Observation\nSome more terminology that is frequently used in data analysis.\nA column vector typically shows a variable. A row vector typically shows an observation. A particularly item, which is a cell in a spreadsheet, is a value. This is visualised in Figure 2.2.\n\n\n\n\n\nFigure 2.2: Variables, observations, rows.\n\n\n\n\n\n# A variable: a column (e.g., birth_years)\nmy_data$birth_years\n#> [1] \"1980\" \"1975\" \"1964\" \"1956\" \"1966\" \"1951\" \"1953\"\n\n# An observation: a row (e.g., second row)\nmy_data[2,]\n#>    names_pm birth_years\n#> 2 Liz Truss        1975\n\n# A particular value (e.g., third row of second column)\nmy_data[3,2]\n#> [1] \"1964\""
   }
 ]
