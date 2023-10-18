@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-10-18">
 
 <title>Methods of Social Enquiry - 2&nbsp; Data in R</title>
 <style>
@@ -93,6 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./w03_Data_analysis.html" rel="next">
 <link href="./w01_Rbasics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -170,6 +172,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./w02_Data_types.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data in R</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w03_Data_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Data Analysis</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -187,6 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#variable-row-observation" id="toc-variable-row-observation" class="nav-link" data-scroll-target="#variable-row-observation"><span class="toc-section-number">2.6</span>  Variable, Row, Observation</a></li>
   <li><a href="#numerical-value-stored-as-character" id="toc-numerical-value-stored-as-character" class="nav-link" data-scroll-target="#numerical-value-stored-as-character"><span class="toc-section-number">2.7</span>  Numerical value stored as character</a></li>
   <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="toc-section-number">2.8</span>  Categorical data</a></li>
+  <li><a href="#saving-data" id="toc-saving-data" class="nav-link" data-scroll-target="#saving-data"><span class="toc-section-number">2.9</span>  Saving data</a></li>
+  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory"><span class="toc-section-number">2.10</span>  Working directory</a></li>
   </ul>
 </nav>
     </div>
@@ -203,6 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 18, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -623,6 +638,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Conservative       Labour </span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            5            2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="saving-data" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="saving-data"><span class="header-section-number">2.9</span> Saving data</h2>
+<p>In the final step, we will learn how to save a dataframe such as <code>my_data</code> for future use. We have a few options:</p>
+<ol type="1">
+<li>Write <code>my_data</code> into a spreadsheet-like file.</li>
+<li>Save the whole R environment with all the objects inside.</li>
+</ol>
+<p>We will cover option #1 here.</p>
+<p>You have probably used Microsoft Excel (or Google Sheets) to work on spreadsheets before. There are different spreadsheet file types (such as Excels <code>.xlsx</code>), but the most common and compatible one is <code>.csv</code>, which stands for <strong>comma separated values</strong>. This is basically plain text that any computer and most electronic devices can open.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> my_data, <span class="at">file =</span> <span class="st">"my_first_file.csv"</span>, <span class="at">row.names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This should create a file somewhere in your computer, more precisely, in your <strong>working directory</strong>. Let’s see where it has saved the file by looking at the working directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="working-directory" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">2.10</span> Working directory</h2>
+<p><code>getwd()</code> means <em>get working directory</em>. Working directory is your default file path. This is where R looks for files and saves any output.</p>
+<p>Working directory can be different in each computer. R Studio has nice tools for navigation.</p>
+<p>You can directly go to your working directory through <code>Files</code> tab (usually in right bottom corner) and <code>More</code> drop-down menu. Under there there are a few options: - Set as working directory: sets your working directory as the current directory shown in Files - Go to working directory: takes you to current working directory</p>
+<p>If you click on go to working directory, you should see <strong>my_first_file.csv</strong> here.</p>
+<p>It is a good idea to create a new directory (folder for Windows) for this module. Your folder names should be simple and easy to write. For example: <code>mse_23-24</code> is a good name. Try not to use <code>space</code> in file names. Underscore and dash are better alternatives. Also, I encourage always using lowercase for file names, which also goes for object names in R.</p>
+<p>You can use your operating system to create this directory. You could also use R Studio’s Files tab. Put this folder somewhere easy to access.</p>
+<p>Let’s save your R script. You can use drop-down menu: File &gt;&gt; Save or simply, cmd/control+s is the keyboard shortcut.</p>
+<p>Give an intuitive name to your script. For example, 01_RBasics.R is a good name.</p>
+<p>It is generally good idea to keep your data in a sub-directory named data. Create such a directory and move <strong>my_first_file.csv</strong> there.</p>
+<p>Next week, we will continue with a simple dataset, which will be available on Blackboard.</p>
 
 
 </section>
@@ -768,6 +813,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./w03_Data_analysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
