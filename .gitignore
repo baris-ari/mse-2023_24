@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+*_cache
+*_files
+search_index.json
+
+/.quarto/
+
+
