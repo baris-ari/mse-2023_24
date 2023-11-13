@@ -3,9 +3,8 @@
 .RData
 .Ruserdata
 .DS_Store
-*_cache
-*_files
-search_index.json
+*/.DS_Store
+**/.DS_Store
 
 /.quarto/
 
