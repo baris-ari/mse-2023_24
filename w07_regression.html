@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./resources.html" rel="next">
+<link href="./w08_regression.html" rel="next">
 <link href="./w06_correlation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -185,6 +185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./w08_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
@@ -204,6 +210,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">7.3</span> Regression</a></li>
   <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">7.4</span> Visualisation</a></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">7.5</span> Exercise</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.6</span> Summary</a></li>
+  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction"><span class="header-section-number">7.7</span> Prediction</a>
+  <ul class="collapse">
+  <li><a href="#predict-function-in-r" id="toc-predict-function-in-r" class="nav-link" data-scroll-target="#predict-function-in-r"><span class="header-section-number">7.7.1</span> Predict function in R</a></li>
+  <li><a href="#prediction-with-new-values-of-x" id="toc-prediction-with-new-values-of-x" class="nav-link" data-scroll-target="#prediction-with-new-values-of-x"><span class="header-section-number">7.7.2</span> Prediction with new values of <em>x</em></a></li>
+  </ul></li>
+  <li><a href="#prediction-error" id="toc-prediction-error" class="nav-link" data-scroll-target="#prediction-error"><span class="header-section-number">7.8</span> Prediction Error</a></li>
+  <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit"><span class="header-section-number">7.9</span> Model Fit</a>
+  <ul class="collapse">
+  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared"><span class="header-section-number">7.9.1</span> R Squared</a></li>
+  <li><a href="#rmse" id="toc-rmse" class="nav-link" data-scroll-target="#rmse"><span class="header-section-number">7.9.2</span> RMSE</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -341,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It is a good idea to put your regression results into an object. <code>lm()</code> has generated much more than it displays on screen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model (m1: model 1)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df<span class="sc">$</span>InstPerform <span class="sc">~</span> df<span class="sc">$</span>CivicCommunity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(InstPerform <span class="sc">~</span> CivicCommunity, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can use <code>summary()</code> to check the output in the object <code>m1</code>.</p>
 <div class="cell">
@@ -349,16 +367,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lm(formula = df$InstPerform ~ df$CivicCommunity)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lm(formula = InstPerform ~ CivicCommunity, data = df)</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Residuals:</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -2.5043 -1.3481 -0.2087  0.9764  3.4957 </span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)        2.71115    0.84443   3.211  0.00485 ** </span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; df$CivicCommunity  0.56730    0.06552   8.658 7.81e-08 ***</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)     2.71115    0.84443   3.211  0.00485 ** </span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CivicCommunity  0.56730    0.06552   8.658 7.81e-08 ***</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ---</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -371,31 +389,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Estimate</em> is the respective estimates for the coefficients.</li>
 <li><em>Std. Error</em> is the standard error. It quantifies the uncertainty in our estimates.</li>
 <li><em>Pr(&gt;|t|)</em> refers to statistical significance and is related to uncertainty in our estimations. A value below 0.05 is often considered as statistically significant, which indicates that the relationship is unlikely due to sampling variability.</li>
-<li><em>Adjusted R-squared</em> refers to how good the overall model fit. It is a value between 0 and 1. 0.80 memans, the 80% of the variation in <code>InstPerform</code> can be explained with <code>CivicCommunity</code>.</li>
+<li><em>Adjusted R-squared</em> refers to how good the overall model fit. It is a value between 0 and 1. 0.80 means, the 80% of the variation in <code>InstPerform</code> can be explained with <code>CivicCommunity</code>.</li>
 </ul>
 <p>A lot of info is provided here, but we may not need all of it. Let’s just have a simplified table. To have a publication-quality table output, we use the texreg package. To install it, make sure to run the code <code>install.packages("texreg")</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"texreg"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: package 'texreg' was built under R version 4.2.3</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Version:  1.39.3</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Date:     2023-11-09</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Author:   Philip Leifeld (University of Essex)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Consider submitting praise using the praise or praise_interactive functions.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please cite the JSS article in your publications -- see citation("texreg").</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Use <code>screenreg()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># texreg's screenreg function displays regression results on the screen.</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(m1)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ============================</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    Model 1  </span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ----------------------------</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)         2.71 ** </span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    (0.84)   </span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; df$CivicCommunity   0.57 ***</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    (0.07)   </span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ----------------------------</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R^2                 0.81    </span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adj. R^2            0.80    </span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Num. obs.          20       </span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ============================</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># texreg's screenreg function displays regression results on the screen.</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(m1)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 Model 1  </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)      2.71 ** </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.84)   </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CivicCommunity   0.57 ***</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.07)   </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R^2              0.81    </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adj. R^2         0.80    </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Num. obs.       20       </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordreg</span>(m1, <span class="st">"my_output.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -426,8 +450,241 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="7.5" class="anchored" data-anchor-id="exercise"><span class="header-section-number">7.5</span> Exercise</h2>
 <p>Using <code>world_in_2010.csv</code>, carry out the regression as formulated below.</p>
 <p><span class="math display">\[ FemaleLifeExpectancy = \alpha + \beta * InfantMortalityRate \]</span> Interpret the output. Provide appropriate visualisations.</p>
+</section>
+<section id="summary" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.6</span> Summary</h2>
+<p>In reading a regression table, make sure to follow these steps.</p>
+<ul>
+<li>Identify the regression line (equation):</li>
+</ul>
+<p><span class="math display">\[ Y = \_\_\_ +  \_\_\_   * X\]</span></p>
+<ul>
+<li>Identify the sign of your coefficients (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) and interpret them:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(m1)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 Model 1  </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)      2.71 ** </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.84)   </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CivicCommunity   0.57 ***</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.07)   </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R^2              0.81    </span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adj. R^2         0.80    </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Num. obs.       20       </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Coefficients: <span class="math inline">\(\alpha = 2.71\)</span> and <span class="math inline">\(\beta = 0.57\)</span>.</p>
+<p><span class="math inline">\(\alpha = 2.71\)</span> means that when <span class="math inline">\(X\)</span> is 0, the predicted value of <span class="math inline">\(Y\)</span> is 2.71.</p>
+<p><span class="math inline">\(\beta = 0.57\)</span> means that a one-unit increase in <span class="math inline">\(X\)</span> is associated with an increase of 0.57 in <span class="math inline">\(Y\)</span>.</p>
+<p>This is sometimes called the <em>marginal effect</em> of <span class="math inline">\(X\)</span> (the size of <span class="math inline">\(\beta\)</span>). The word <em>effect</em> here is kind of a misnomer because it encourages you to think in terms of cause and effect. However, it is a commonly used word, so we are going to use it as well, but do not think this in terms of causality.</p>
+</section>
+<section id="prediction" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="prediction"><span class="header-section-number">7.7</span> Prediction</h2>
+<p>Running this regression, we created a statistical model which guesses the expected <span class="math inline">\(Y\)</span> values when we give some <span class="math inline">\(X\)</span> values. In this respect, the regression line is the prediction line. You can think regression as predictive modelling.</p>
+<p>For a given value of <span class="math inline">\(X\)</span>, the line gives us the <strong>predicted value of <span class="math inline">\(Y\)</span></strong>, or simply <span class="math inline">\(\hat{Y}\)</span>. <span class="math inline">\(\hat{Y}\)</span> reads as <span class="math inline">\(Y \  hat\)</span> and means the <span class="math inline">\(predicted\ value\  of\ Y\)</span>.</p>
+<p><span class="math display">\[When\ X = 0 \ \ \rightarrow\ \ \ \hat{Y} = 2.71 + 0 * 0.57 = 2.71 \]</span> <span class="math display">\[When\ X = 1 \ \ \rightarrow \ \ \hat{Y} = 2.71 + 1 * 0.57 = 3.28\]</span></p>
+<p><span class="math display">\[When\ X = 1 \ \ \rightarrow \ \ \hat{Y} = 2.71 + 2 * 0.57 = 3.85\]</span> <span class="math display">\[...\]</span></p>
+<section id="predict-function-in-r" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="predict-function-in-r"><span class="header-section-number">7.7.1</span> Predict function in R</h3>
+<p>You can use <code>predict()</code> to get <span class="math inline">\(\hat{Y}\)</span> for your regression model. The input of <code>predict()</code> is our regression output, which is stored in the object <code>m1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(<span class="at">object =</span> m1)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1         2         3         4         5         6         7         8 </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7.249547  4.980350  3.278452  3.845751 12.922540 12.355241 10.086044 11.787942 </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         9        10        11        12        13        14        15        16 </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12.355241 11.504292  4.696700 11.504292  4.696700  7.533197  4.696700 12.638891 </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        17        18        19        20 </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12.922540 11.504292 11.220642 11.220642</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that 20 predictions are printed. This is equal to the number of observations in our data. You can save this in a variable in df.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># predicted values of Institutional Performance according to m1</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>m1_yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object =</span> m1)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View(df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s visualize these predicted values of Institutional Performance. They will form a line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> CivicCommunity, <span class="at">y =</span> m1_yhat)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Civic Community"</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Predicted values of Institutional Performance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="w07_regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Indeed, these predicted values are all on the regression line.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> CivicCommunity, <span class="at">y =</span> InstPerform)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> F, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> CivicCommunity, <span class="at">y =</span> m1_yhat), </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Institutional Performance"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Civic Community Score"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="w07_regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prediction-with-new-values-of-x" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="prediction-with-new-values-of-x"><span class="header-section-number">7.7.2</span> Prediction with new values of <em>x</em></h3>
+<p>Imagine that we have a new region with a <em>Civic Community Score</em> of 10 and we would like to predict its likely <em>Institutional Performance</em> using our regression model.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-reg01" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="graphics/regression01.png" class="img-fluid figure-img" alt="Regression line" width="800"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Regression line</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s remind ourselves the regression model:</p>
+<p><span class="math display">\[\hat{y} = \alpha + \beta * x \]</span></p>
+<p>So when <code>CivicCommunity</code> is 10:</p>
+<p><span class="math display">\[x = 10 \ \ \rightarrow \ \ \hat{y} = \alpha + 10 * \beta \]</span></p>
+<p>We have estimated the model coefficients, namely <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. You can directly go into model coefficients using the approach below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model coefficients (m1):</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coefficients</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    (Intercept) CivicCommunity </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      2.7111528      0.5672993</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># m1 alpha:</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coefficients[<span class="dv">1</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept) </span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    2.711153</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># m1 beta:</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CivicCommunity </span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      0.5672993</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We could ask R to calculate <span class="math inline">\(\alpha + 10 * \beta\)</span> by writing each of the constituent parts:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coefficients[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">10</span> <span class="sc">*</span> m1<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept) </span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    8.384146</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, this is not necessary because <code>predict()</code> function is capable of handling different <span class="math inline">\(X\)</span> values that we may plug in. We need to use the option <code>newdata</code>, which takes a data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict yhat (model: m1) when  x = 10</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(m1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">CivicCommunity =</span> <span class="dv">10</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        1 </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8.384146</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-reg02" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="graphics/regression02.png" class="img-fluid figure-img" alt="Regression line" width="800"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.2: Regression line</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Predicted <em>Institutional Performance</em> is 8.38 when <em>Civic Community</em> is 10, according to our regression model (m1).</p>
+<p>We can also give multiple <span class="math inline">\(x\)</span> values to <code>predict()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict yhat (model: m1) when  x is 1,2,3,......18, 19, 20</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x_values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CivicCommunity =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">1</span>)) <span class="co"># create x values</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict:</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(m1, x_values)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         1         2         3         4         5         6         7         8 </span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3.278452  3.845751  4.413051  4.980350  5.547649  6.114949  6.682248  7.249547 </span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         9        10        11        12        13        14        15        16 </span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7.816847  8.384146  8.951445  9.518745 10.086044 10.653343 11.220642 11.787942 </span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        17        18        19        20 </span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12.355241 12.922540 13.489840 14.057139</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="prediction-error" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="prediction-error"><span class="header-section-number">7.8</span> Prediction Error</h2>
+<p>Predicted institutional performance <span class="math inline">\((\hat{y})\)</span> from model 1 are not perfect – and they should not me. These are estimates after all. The estimate is a little bit off for each observation.</p>
+<p>The difference between <span class="math inline">\(y\)</span> (actual realization of the outcome) and <span class="math inline">\(\hat{y}\)</span> (our estimate using the regression model) is called the error term of the model and demonstrated with <span class="math inline">\(e\)</span>.</p>
+<p><span class="math display">\[ y_i  =  \hat{y}_i  + e_i   \]</span></p>
+<p><span class="math display">\[ y_i - \hat{y}_i = e_i   \]</span></p>
+<p><span class="math inline">\(e_i\)</span> is sometimes called <em>residual</em>. Residual and error are used interchangeably. Each error is visualised in <a href="#fig-reg03">Figure&nbsp;<span>7.3</span></a> below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-reg03" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="graphics/regression03.png" class="img-fluid figure-img" alt="Regression line" width="800"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.3: Regression line</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Calculating each error term is straightforward.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the error term</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>m1_error <span class="ot">&lt;-</span> df<span class="sc">$</span>InstPerform <span class="sc">-</span> df<span class="sc">$</span>m1_yhat </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># they are also stored in m1</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># error terms (residuals) of the regression:</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>residuals</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           1           2           3           4           5           6 </span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.25045269  2.51964992 -1.77845215 -1.34575146  3.07745959 -0.35524110 </span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           7           8           9          10          11          12 </span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -0.08604386 -0.78794179 -1.35524110 -2.50429213  1.80329958  1.49570787 </span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          13          14          15          16          17          18 </span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  0.80329958 -2.03319697 -0.19670042  0.36110925 -1.92254041  3.49570787 </span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          19          20 </span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -1.22064248 -0.22064248</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-fit" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="model-fit"><span class="header-section-number">7.9</span> Model Fit</h2>
+<p>As we discussed in the lecture, regression line is drawn by minimizing the sum of squared values of <span class="math inline">\(e_i\)</span>. We minimize <span class="math inline">\(\sum_{i=1}^{n}e_i^2\)</span> to estimate model coefficients. This approach is called ordinary least square (OLS) regression.</p>
+<p>We can check how good the regression line fits the data. This is called <em>goodness of fit</em>. We have two measures of <em>goodness of fit</em>. - R squared (<span class="math inline">\(R^2\)</span>) - Root Mean Squared Error (RMSE)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(m1, <span class="at">include.rmse =</span> T)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 Model 1  </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (Intercept)      2.71 ** </span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.84)   </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CivicCommunity   0.57 ***</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 (0.07)   </span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -------------------------</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R^2              0.81    </span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adj. R^2         0.80    </span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Num. obs.       20       </span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RMSE             1.79    </span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =========================</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="r-squared" class="level3" data-number="7.9.1">
+<h3 data-number="7.9.1" class="anchored" data-anchor-id="r-squared"><span class="header-section-number">7.9.1</span> R Squared</h3>
+<p><span class="math inline">\(R^2\)</span> shows how much variation in <span class="math inline">\(Y\)</span> is explained by <span class="math inline">\(X\)</span>. <span class="math inline">\(R^2\)</span> ranges between 0 and 1. In our regression, <span class="math inline">\(R^2 = 0.81\)</span>, which means 81% variation in <span class="math inline">\(Y\)</span> is explained by <span class="math inline">\(X\)</span>. This value is equal to the square of <span class="math inline">\(r\)</span> (correlation coefficient).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># correlation coefficient squared:</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df<span class="sc">$</span>InstPerform, df<span class="sc">$</span>CivicCommunity) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8063829</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Adjusted <span class="math inline">\(R^2\)</span> introduces a small correction to a measurement issue in <span class="math inline">\(R^2\)</span>. It introduces a penalty to <span class="math inline">\(R^2\)</span> based on how many variables we have in the model. Adjusted <span class="math inline">\(R^2\)</span> is lower than <span class="math inline">\(R^2\)</span> because it is penalized. For our purposes, it is a technical detail and it does not really matter if you use <span class="math inline">\(R^2\)</span> or Adjusted <span class="math inline">\(R^2\)</span>.</p>
+</section>
+<section id="rmse" class="level3" data-number="7.9.2">
+<h3 data-number="7.9.2" class="anchored" data-anchor-id="rmse"><span class="header-section-number">7.9.2</span> RMSE</h3>
+<p>Root Mean Squared Error (a.k.a. residual standard error) shows how much <span class="math inline">\(\hat{y_i}\)</span> is different from <span class="math inline">\(y_i\)</span>. In <code>texreg</code>, we can include it by adding the option <code>include.rmse = T</code>. It is also possible to manually calculate it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># root mean squared residuals</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(m1<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>m1<span class="sc">$</span>df.residual)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1.789021</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -671,8 +928,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./resources.html" class="pagination-link">
-        <span class="nav-page-text">Resources</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./w08_regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
